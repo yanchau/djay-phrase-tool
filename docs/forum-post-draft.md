@@ -14,7 +14,9 @@ So I built a companion app for it myself. It's free, open source, and **strictly
 
 **A note on genre:** I mix techno, and that shaped some of the design choices below — the structure/energy detection leans on kick presence/absence as the main signal, which is a reliable marker in techno but won't generalize as cleanly to genres with sparser or less kick-driven structure (vocal-heavy house, hip-hop, etc.). The phrase counter and waveform are genre-agnostic and should work for anyone; the automatic structure labels and energy scale are the parts most likely to need retuning outside of techno/house-adjacent styles. Said so upfront so nobody's surprised.
 
-**A moderator's note in advance:** this tool works by reading djay's own on-disk data formats (its live UI via macOS's Accessibility API, its SQLite library database, and its per-track analysis cache), none of which is documented publicly. I'm posting this because I think it's useful to the community, but I fully understand if Algoriddim/moderation would rather this kind of post not live here — happy for it to be removed if so, no hard feelings. The code and the full technical writeup live on GitHub regardless: **[link]**.
+**A moderator's note in advance:** this tool works by reading djay's own on-disk data formats (its live UI via macOS's Accessibility API, its SQLite library database, and its per-track analysis cache), none of which is documented publicly. I'm posting this because I think it's useful to the community, but I fully understand if Algoriddim/moderation would rather this kind of post not live here — happy for it to be removed if so, no hard feelings. The code and the full technical writeup live on GitHub regardless: **https://github.com/yanchau/djay-phrase-tool**.
+
+*Screenshot: [`docs/images/screenshot.png`](../docs/images/screenshot.png) in the repo — drag it directly into the forum's post editor when actually posting (Discourse uploads it and inserts the image for you; a relative repo link like this won't render on the forum itself). Shown in French there since the panel follows your Mac's system language automatically — it'll show in English if your Mac is set to English, no setting to change.*
 
 ## What it does
 
@@ -31,10 +33,12 @@ It's a small floating panel that sits on top of djay Pro (macOS only) and shows,
 - **"Launch in sync" helper** — when one deck is paused and the other is playing, shows exactly which bar number the playing deck will be at when you should press play on the paused one, so you don't have to do the countdown math in your head.
 - **Follows your Mac's language** — the panel's own text is in French or English depending on your system language. Separately, it correctly reads djay Pro's UI regardless of which language *djay itself* is set to (confirmed with djay running in French, where several of its accessibility labels are translated).
 
-## How to use it (step by step)
+## How to use it
 
-1. **Requirements**: macOS, djay Pro, Xcode Command Line Tools (`xcode-select --install` in Terminal — the full Xcode app isn't required). No paid account or subscription needed for any of this.
-2. **Download**: clone or download the repo: **[GitHub link]**.
+**Option A — Terminal, if you're comfortable with it (~2 minutes, free, no account needed)**
+
+1. **Requirements**: macOS, djay Pro, Xcode Command Line Tools (`xcode-select --install` in Terminal — the full Xcode app isn't required).
+2. **Download**: https://github.com/yanchau/djay-phrase-tool
 3. **Grant permission**: the first time you run it, macOS will ask for Accessibility permission for your terminal app (Terminal, iTerm2, etc.) — this is what lets it read djay's UI. Grant it in System Settings → Privacy & Security → Accessibility if it doesn't prompt automatically.
 4. **Open djay Pro** and load a track on at least one deck.
 5. **Run it** — either:
@@ -47,7 +51,32 @@ It's a small floating panel that sits on top of djay Pro (macOS only) and shows,
 7. **Resize it** by dragging any edge or corner — everything scales together, fonts included.
 8. To stop: close the panel, or `Ctrl+C` in the terminal.
 
-*Prefer not to touch Terminal at all, or got stuck above? [**GETTING-STARTED-FOR-BEGINNERS.md**](getting-started-link) walks through the same setup using Claude Code, an AI assistant that runs the commands for you — optional, and it requires a paid Claude plan or API credits, so it's offered here as an alternative, not a requirement.*
+**Option B — Never used Terminal or written code before? Let an AI assistant set it up for you**
+
+This is genuinely how the tool itself was built — the author doesn't code either. Needs a paid Claude plan or API credits (Claude Code isn't free), but zero coding knowledge:
+
+1. On the [GitHub page](https://github.com/yanchau/djay-phrase-tool), click **Code → Download ZIP**, then double-click the ZIP to unzip it.
+2. Open Terminal: `Cmd + Space`, type `Terminal`, `Enter`. A plain text window opens — that's normal.
+3. Paste this and press Enter to install Claude Code:
+   ```
+   npm install -g @anthropic-ai/claude-code
+   ```
+   (if it says `command not found`, install Node.js from [nodejs.org](https://nodejs.org) first, then retry)
+4. Go into the unzipped folder and start Claude Code there, e.g.:
+   ```
+   cd ~/djay-phrase-tool-main
+   claude
+   ```
+   (typing `cd ` with a trailing space, then dragging the folder from Finder into the Terminal window, also works and avoids typos)
+5. Once you see a prompt, type:
+   ```
+   Please set this up and run it for me. I've never used a terminal before,
+   so explain each step simply and ask before doing anything that needs my
+   permission.
+   ```
+   It'll read the project's README, install anything missing, walk you through granting the one macOS permission it needs, and get the app running — asking your approval before anything that changes your system, every time.
+
+Full version of this path with troubleshooting: [`GETTING-STARTED-FOR-BEGINNERS.md`](https://github.com/yanchau/djay-phrase-tool/blob/main/docs/GETTING-STARTED-FOR-BEGINNERS.md).
 
 ## What it doesn't do
 
@@ -62,4 +91,4 @@ The GitHub repo includes a full writeup of djay's internal data formats — the 
 
 Feedback, bug reports, and pull requests all welcome. Thanks for reading!
 
-**GitHub: [link]**
+**GitHub: https://github.com/yanchau/djay-phrase-tool**

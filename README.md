@@ -20,7 +20,9 @@ Read [`docs/TECHNICAL.md`](docs/TECHNICAL.md) for the full reverse-engineering w
 
 ## Screenshot
 
-*(A floating HUD panel — one block per deck: phrase number in large type, bar/beat position, countdown to the next phrase boundary, a live scrolling waveform colored by frequency band, a full-track structure overview, an energy scale, and countdowns to the next detected structural change, your own cue points, and suggested mix-out points.)*
+![The floating panel above djay Pro, one block per deck: phrase number, bar/beat position, a live scrolling waveform colored by frequency band, energy scale, and countdowns to the next structural change, cue point, and suggested mix-out point.](docs/images/screenshot.png)
+
+Shown in French here — the panel's own text automatically follows your Mac's system language (French or English), nothing to configure. djay Pro itself is read correctly regardless of which language *it's* set to, independently of this.
 
 ## Safety
 
