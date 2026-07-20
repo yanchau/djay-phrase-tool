@@ -2,6 +2,8 @@
 
 A read-only companion tool for [Algoriddim djay Pro](https://www.algoriddim.com/djay-pro-mac) on macOS that adds **live phrase analysis** — a feature DJs have been [asking for since 2016](https://community.algoriddim.com/t/can-we-have-phrase-analysis/23688) and djay has never shipped.
 
+**Just want to install and run it? → Jump to [Setup](#setup).**
+
 It shows, per deck, in real time: which beat/bar/phrase you're in, a countdown to the next phrase boundary, a live scrolling waveform, detected track structure (intro/groove/break/drop/outro), a Mixed In Key-style energy scale, and countdowns to your own cue points and to detected mix-out points — all without ever writing to djay's database or touching your audio files.
 
 It's built from three layers, each usable independently:
