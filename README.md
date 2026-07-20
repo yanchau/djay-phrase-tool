@@ -44,9 +44,7 @@ docs/TECHNICAL.md        Full technical writeup — binary formats, extraction
 
 ## Setup
 
-**Never used Terminal or written code before?** Read [`docs/GETTING-STARTED-FOR-BEGINNERS.md`](docs/GETTING-STARTED-FOR-BEGINNERS.md) instead — it walks you through using Claude Code (an AI assistant that can act on your Mac) to set this up and run it for you, step by step.
-
-Requires macOS with Xcode Command Line Tools — a full Xcode install is not needed to build and run the app, only to run its test suite.
+Requires macOS with Xcode Command Line Tools — a full Xcode install is not needed to build and run the app, only to run its test suite. No paid account or subscription of any kind is needed for the steps below.
 
 1. **Open Terminal**: press `Cmd + Space`, type `Terminal`, press `Enter`. A plain window with text will open — this is normal.
 2. **Install the Xcode Command Line Tools** (skip if you've already installed them before): copy the line below (select it, `Cmd+C`), click inside the Terminal window, paste it (`Cmd+V`), then press `Enter`:
@@ -68,6 +66,8 @@ Requires macOS with Xcode Command Line Tools — a full Xcode install is not nee
 6. A floating panel appears, staying above djay Pro. For a track djay has already analyzed, the phrase counter starts automatically — no calibration needed. For a track djay hasn't analyzed yet (or if its automatic beatgrid is wrong), press `⌃⌥1` (deck 1) or `⌃⌥2` (deck 2) on the first kick to calibrate manually; djay Pro's own "Edit Grid" corrections are also read and take priority automatically when present.
 
 The panel is resizable (drag any edge/corner, everything in it scales together) and has a close button (×) in its top-right corner.
+
+**Prefer not to touch Terminal at all, or got stuck above?** [`docs/GETTING-STARTED-FOR-BEGINNERS.md`](docs/GETTING-STARTED-FOR-BEGINNERS.md) walks through the same setup using Claude Code, an AI assistant that runs the commands for you and explains each step — optional, and it requires a paid Claude plan or API credits, so it's offered as an alternative here, not a requirement.
 
 ## What's read-only vs. what's stored locally
 

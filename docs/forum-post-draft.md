@@ -32,9 +32,7 @@ It's a small floating panel that sits on top of djay Pro (macOS only) and shows,
 
 ## How to use it (step by step)
 
-*Never used Terminal or written code before? There's a beginner-friendly path using an AI assistant to set it up for you — click [**GETTING-STARTED-FOR-BEGINNERS.md**](getting-started-link) to read it directly on GitHub (no download needed, it opens right in your browser) instead of following the steps below.*
-
-1. **Requirements**: macOS, djay Pro, Xcode Command Line Tools (`xcode-select --install` in Terminal — the full Xcode app isn't required).
+1. **Requirements**: macOS, djay Pro, Xcode Command Line Tools (`xcode-select --install` in Terminal — the full Xcode app isn't required). No paid account or subscription needed for any of this.
 2. **Download**: clone or download the repo: **[GitHub link]**.
 3. **Grant permission**: the first time you run it, macOS will ask for Accessibility permission for your terminal app (Terminal, iTerm2, etc.) — this is what lets it read djay's UI. Grant it in System Settings → Privacy & Security → Accessibility if it doesn't prompt automatically.
 4. **Open djay Pro** and load a track on at least one deck.
@@ -47,6 +45,8 @@ It's a small floating panel that sits on top of djay Pro (macOS only) and shows,
 6. A floating panel appears above djay Pro (it has a close button in the top-right corner). For most tracks, the phrase counter starts immediately. If it says "searching djay's database…" for more than a few seconds (a brand-new track djay hasn't analyzed yet, or a very obscure edge case), tap `⌃⌥1` (deck 1) or `⌃⌥2` (deck 2) right on the first kick to calibrate manually — it'll remember this per track from then on.
 7. **Resize it** by dragging any edge or corner — everything scales together, fonts included.
 8. To stop: close the panel, or `Ctrl+C` in the terminal.
+
+*Prefer not to touch Terminal at all, or got stuck above? [**GETTING-STARTED-FOR-BEGINNERS.md**](getting-started-link) walks through the same setup using Claude Code, an AI assistant that runs the commands for you — optional, and it requires a paid Claude plan or API credits, so it's offered here as an alternative, not a requirement.*
 
 ## What it doesn't do
 
