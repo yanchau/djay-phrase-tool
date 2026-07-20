@@ -29,6 +29,7 @@ It's a small floating panel that sits on top of djay Pro (macOS only) and shows,
 - **Countdown to your own cue points** — [another long-requested feature](https://community.algoriddim.com/t/beat-countdown-to-next-cue-point/28162), this reads the actual cue points you've placed in djay (ground truth, not a guess), with a countdown and bar number to the next one.
 - **Suggested mix-out points** — a countdown to the next detected break or the start of the outro, answering [another open request here](https://community.algoriddim.com/t/automix-ai-break-point-recognition-for-mix-out-points/42723) about djay's Automix not finding good mix-out points (this doesn't touch Automix, but gives you the same information to act on manually).
 - **"Launch in sync" helper** — when one deck is paused and the other is playing, shows exactly which bar number the playing deck will be at when you should press play on the paused one, so you don't have to do the countdown math in your head.
+- **Follows your Mac's language** — the panel's own text is in French or English depending on your system language. Separately, it correctly reads djay Pro's UI regardless of which language *djay itself* is set to (confirmed with djay running in French, where several of its accessibility labels are translated).
 
 ## How to use it (step by step)
 
