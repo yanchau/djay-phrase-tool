@@ -24,7 +24,7 @@ struct EnergyScaleView: View {
         // single HStack overflow the 280px panel width and get clipped.
         VStack(alignment: .leading, spacing: 1 * scale) {
             HStack(spacing: 6 * scale) {
-                Text("Énergie")
+                Text(L.t("Énergie", "Energy"))
                     .font(Tokens.font(Tokens.TypeSize.micro, scale: scale))
                     .foregroundStyle(Tokens.textSecondary)
                 HStack(spacing: 2 * scale) {
@@ -42,7 +42,7 @@ struct EnergyScaleView: View {
                 }
             }
             if let globalLevel {
-                Text("morceau : \(globalLevel)/10")
+                Text(L.t("morceau : \(globalLevel)/10", "track: \(globalLevel)/10"))
                     .font(Tokens.font(Tokens.TypeSize.micro, scale: scale))
                     .monospacedDigit()
                     .foregroundStyle(Tokens.textSecondary)

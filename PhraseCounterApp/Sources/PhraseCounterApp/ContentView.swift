@@ -72,7 +72,7 @@ struct ContentView: View {
                         .frame(width: 30, height: 30)
                 }
                 .padding(8)
-                .help("Glisser pour redimensionner (agrandir ou réduire)")
+                .help(L.t("Glisser pour redimensionner (agrandir ou réduire)", "Drag to resize (bigger or smaller)"))
             }
             .overlay(alignment: .topTrailing) {
                 // The panel is a borderless NSPanel (deliberate — no title
@@ -91,7 +91,7 @@ struct ContentView: View {
                 }
                 .buttonStyle(.plain)
                 .padding(8)
-                .help("Quitter")
+                .help(L.t("Quitter", "Quit"))
             }
         }
         .background(Tokens.background)

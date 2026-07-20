@@ -55,7 +55,7 @@ struct DeckPhraseView: View {
     private func beatsSuffix(_ secondsUntil: Double) -> String {
         guard let beatDuration, beatDuration > 0 else { return "" }
         let beats = Int((secondsUntil / beatDuration).rounded())
-        return " · \(beats) temps"
+        return L.t(" · \(beats) temps", " · \(beats) beats")
     }
 
     private func f(_ base: CGFloat, weight: Font.Weight = .regular, design: Font.Design = .default) -> Font {
@@ -111,13 +111,17 @@ struct DeckPhraseView: View {
                     // dropping the filler words entirely.
                     let playingBar = pressPlayIn.barNumber.map { "\($0)" } ?? "?"
                     let pausedBar = pressPlayIn.pausedBarNumber.map { "\($0)" } ?? "?"
-                    Text("▶ calage : D\(pressPlayIn.playingDeckNumber) mesure \(playingBar) (\(String(format: "%.1fs", pressPlayIn.secondsUntil))) → D\(deckNumber) mesure \(pausedBar)")
+                    let syncSeconds = String(format: "%.1fs", pressPlayIn.secondsUntil)
+                    Text(L.t(
+                        "▶ calage : D\(pressPlayIn.playingDeckNumber) mesure \(playingBar) (\(syncSeconds)) → D\(deckNumber) mesure \(pausedBar)",
+                        "▶ sync: D\(pressPlayIn.playingDeckNumber) bar \(playingBar) (\(syncSeconds)) → D\(deckNumber) bar \(pausedBar)"
+                    ))
                         .font(f(Tokens.TypeSize.body, weight: .semibold))
                         .monospacedDigit()
                         .foregroundStyle(Tokens.pressPlay)
                 }
                 HStack(alignment: .lastTextBaseline, spacing: s(6)) {
-                    Text("Phrase")
+                    Text(L.t("Phrase", "Phrase"))
                         .font(f(Tokens.TypeSize.body))
                         .foregroundStyle(Tokens.textSecondary)
                     Text("\(p.phraseNumber)")
@@ -125,15 +129,21 @@ struct DeckPhraseView: View {
                         .foregroundStyle(Tokens.accent)
                         .monospacedDigit()
                 }
-                Text("Mesure \(p.barInPhrase)/\(beatsPerPhrase / 4) · Temps \(p.beatInBar)")
+                Text(L.t(
+                    "Mesure \(p.barInPhrase)/\(beatsPerPhrase / 4) · Temps \(p.beatInBar)",
+                    "Bar \(p.barInPhrase)/\(beatsPerPhrase / 4) · Beat \(p.beatInBar)"
+                ))
                     .font(f(Tokens.TypeSize.title, design: .rounded))
                     .monospacedDigit()
-                Text("↓ \(p.beatsUntilNextPhrase) temps · \(String(format: "%.1fs", p.secondsUntilNextPhrase))")
+                Text(L.t(
+                    "↓ \(p.beatsUntilNextPhrase) temps · \(String(format: "%.1fs", p.secondsUntilNextPhrase))",
+                    "↓ \(p.beatsUntilNextPhrase) beats · \(String(format: "%.1fs", p.secondsUntilNextPhrase))"
+                ))
                     .font(f(Tokens.TypeSize.headline, weight: .semibold))
                     .monospacedDigit()
                     .foregroundStyle(p.isInAlertWindow ? Tokens.alert : Tokens.textSecondary)
                 if let upcomingCue {
-                    let barSuffix = upcomingCue.barNumber.map { " (mesure \($0))" } ?? ""
+                    let barSuffix = upcomingCue.barNumber.map { L.t(" (mesure \($0))", " (bar \($0))") } ?? ""
                     // A small colored badge, not an SF Symbol flag —
                     // reworked 2026-07-20 at the user's request to look
                     // more like djay's own lettered cue markers (A/B/C…,
@@ -145,15 +155,21 @@ struct DeckPhraseView: View {
                         RoundedRectangle(cornerRadius: 3 * scale)
                             .fill(Tokens.cue)
                             .frame(width: 14 * scale, height: 14 * scale)
-                        Text("prochain cue : \(String(format: "%.0fs", upcomingCue.secondsUntil))\(barSuffix)\(beatsSuffix(upcomingCue.secondsUntil))")
+                        Text(L.t(
+                            "prochain cue : \(String(format: "%.0fs", upcomingCue.secondsUntil))\(barSuffix)\(beatsSuffix(upcomingCue.secondsUntil))",
+                            "next cue: \(String(format: "%.0fs", upcomingCue.secondsUntil))\(barSuffix)\(beatsSuffix(upcomingCue.secondsUntil))"
+                        ))
                             .font(f(Tokens.TypeSize.body))
                             .monospacedDigit()
                     }
                     .foregroundStyle(Tokens.cue)
                 }
                 if let upcomingExit {
-                    let barSuffix = upcomingExit.barNumber.map { " (mesure \($0))" } ?? ""
-                    Text("sortie sugg. : \(String(format: "%.0fs", upcomingExit.secondsUntil))\(barSuffix)\(beatsSuffix(upcomingExit.secondsUntil))")
+                    let barSuffix = upcomingExit.barNumber.map { L.t(" (mesure \($0))", " (bar \($0))") } ?? ""
+                    Text(L.t(
+                        "sortie sugg. : \(String(format: "%.0fs", upcomingExit.secondsUntil))\(barSuffix)\(beatsSuffix(upcomingExit.secondsUntil))",
+                        "suggested exit: \(String(format: "%.0fs", upcomingExit.secondsUntil))\(barSuffix)\(beatsSuffix(upcomingExit.secondsUntil))"
+                    ))
                         .font(f(Tokens.TypeSize.body))
                         .monospacedDigit()
                         .foregroundStyle(Tokens.breakOrExit)
@@ -175,18 +191,27 @@ struct DeckPhraseView: View {
                         // same reason as "lancer sur la mesure N" above
                         // (2026-07-20): it's the landmark to watch for,
                         // the countdown is the backup.
-                        let barPart = upcoming.barNumber.map { "mesure \($0) " } ?? ""
-                        Text("prochain changement : \(barPart)(dans \(String(format: "%.0fs", upcoming.secondsUntil))\(beatsSuffix(upcoming.secondsUntil)))\(upcoming.isPhraseAligned ? "" : " (?)")")
+                        let barPart = upcoming.barNumber.map { L.t("mesure \($0) ", "bar \($0) ") } ?? ""
+                        let changeSeconds = String(format: "%.0fs", upcoming.secondsUntil)
+                        let changeBeats = beatsSuffix(upcoming.secondsUntil)
+                        let alignedSuffix = upcoming.isPhraseAligned ? "" : " (?)"
+                        Text(L.t(
+                            "prochain changement : \(barPart)(dans \(changeSeconds)\(changeBeats))\(alignedSuffix)",
+                            "next change: \(barPart)(in \(changeSeconds)\(changeBeats))\(alignedSuffix)"
+                        ))
                             .font(f(Tokens.TypeSize.body))
                             .monospacedDigit()
                             .foregroundStyle(Tokens.textPrimary)
                     }
                 }
             } else {
-                Text("Recherche dans la base djay…")
+                Text(L.t("Recherche dans la base djay…", "Searching djay's database…"))
                     .font(f(Tokens.TypeSize.caption))
                     .foregroundStyle(Tokens.textSecondary)
-                Text("(⌃⌥\(deckNumber) sur le premier kick pour caler manuellement)")
+                Text(L.t(
+                    "(⌃⌥\(deckNumber) sur le premier kick pour caler manuellement)",
+                    "(⌃⌥\(deckNumber) on the first kick to calibrate manually)"
+                ))
                     .font(f(Tokens.TypeSize.caption))
                     .foregroundStyle(Tokens.textSecondary)
             }

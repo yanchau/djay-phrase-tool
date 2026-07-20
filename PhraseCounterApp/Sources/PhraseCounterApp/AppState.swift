@@ -246,7 +246,7 @@ final class AppState: ObservableObject {
 
         if let entry = store.lookup(artist: artist, title: title) {
             apply(deck: deck, offset: entry.elapsedSecondsAtDownbeat,
-                  beatsPerPhrase: entry.beatsPerPhrase, source: "manuel")
+                  beatsPerPhrase: entry.beatsPerPhrase, source: L.t("manuel", "manual"))
             return
         }
 
@@ -260,7 +260,7 @@ final class AppState: ObservableObject {
                 let currentInfo = deck == 1 ? self.deck1Info : self.deck2Info
                 guard currentInfo.title == title, currentInfo.artist == artist else { return }
                 guard let result else { return }
-                let origin = result.isManualGridEdit ? "djay, grille corrigée" : "djay, auto-détecté"
+                let origin = result.isManualGridEdit ? L.t("djay, grille corrigée", "djay, corrected grid") : L.t("djay, auto-détecté", "djay, auto-detected")
                 self.apply(
                     deck: deck, offset: result.downbeatOffsetSeconds, beatsPerPhrase: nil,
                     source: "\(origin) (\(result.source), \(String(format: "%.1f", result.bpm)) BPM)"
@@ -516,8 +516,8 @@ final class AppState: ObservableObject {
         let elapsed = deck == 1 ? interp1.interpolatedElapsed() : interp2.interpolatedElapsed()
         guard let e = elapsed else { return }
 
-        if deck == 1 { phraseClock1.downbeatOffsetSeconds = e; deck1CalibrationSource = "manuel" }
-        else { phraseClock2.downbeatOffsetSeconds = e; deck2CalibrationSource = "manuel" }
+        if deck == 1 { phraseClock1.downbeatOffsetSeconds = e; deck1CalibrationSource = L.t("manuel", "manual") }
+        else { phraseClock2.downbeatOffsetSeconds = e; deck2CalibrationSource = L.t("manuel", "manual") }
 
         let info = deck == 1 ? deck1Info : deck2Info
         guard let title = info.title, let artist = info.artist else { return }
