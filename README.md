@@ -69,6 +69,16 @@ Requires macOS with Xcode Command Line Tools — a full Xcode install is not nee
    - or, simpler: just double-click **`Launch PhraseCounterApp.command`** at the repo root — no copying or typing at all (first double-click may show a macOS security prompt — right-click it → Open → Open once instead, then double-click works normally after that).
 6. A floating panel appears, staying above djay Pro. For a track djay has already analyzed, the phrase counter starts automatically — no calibration needed. For a track djay hasn't analyzed yet (or if its automatic beatgrid is wrong), press `⌃⌥1` (deck 1) or `⌃⌥2` (deck 2) on the first kick to calibrate manually; djay Pro's own "Edit Grid" corrections are also read and take priority automatically when present.
 
+### Alternative: prebuilt app (no compiling)
+
+If you'd rather skip Xcode Command Line Tools entirely, a prebuilt, unsigned `.app` is available from [the latest release](https://github.com/yanchau/djay-phrase-tool/releases/latest) — this is a convenience option, not the primary path (see [Safety](#safety) for why source-compile is the documented default).
+
+1. Go to the [Releases page](https://github.com/yanchau/djay-phrase-tool/releases/latest) and download `PhraseCounterApp-macOS.zip` (under **Assets**).
+2. Double-click the downloaded zip to unzip it — you'll get `PhraseCounterApp.app`.
+3. Move it wherever you like (e.g. your Applications folder), then **right-click it → Open → Open** (this one-time step is needed because the app is unsigned — no Apple Developer ID behind this project; a plain double-click will refuse to launch it the first time).
+4. Grant Accessibility permission when macOS asks (System Settings → Privacy & Security → Accessibility) — enable it for **PhraseCounterApp**.
+5. Open djay Pro, load a track, and the floating panel should appear. Same calibration and behavior as above.
+
 The panel is resizable (drag any edge/corner, everything in it scales together) and has a close button (×) in its top-right corner. Its text follows your Mac's system language — French if your system is set to French, English otherwise (this is about the panel's *own* text; djay Pro's UI itself can be in whatever language you already have it in, read separately — see [`docs/TECHNICAL.md`](docs/TECHNICAL.md#reading-djays-live-ui-accessibility-api)).
 
 **Prefer not to touch Terminal at all, or got stuck above?** [`docs/GETTING-STARTED-FOR-BEGINNERS.md`](docs/GETTING-STARTED-FOR-BEGINNERS.md) walks through the same setup using Claude Code, an AI assistant that runs the commands for you and explains each step — optional, and it requires a paid Claude plan or API credits, so it's offered as an alternative here, not a requirement.
