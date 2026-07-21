@@ -83,13 +83,29 @@ The panel is resizable (drag any edge/corner, everything in it scales together) 
 
 ### Option 2: Prebuilt app (no compiling)
 
-A prebuilt, unsigned `.app` — no Xcode Command Line Tools, no Terminal. This is a convenience option, not the primary path (see [Safety](#safety) for why source-compile is the documented default).
+A prebuilt, unsigned `.app` — no Xcode Command Line Tools, no Terminal at all. This is a convenience option, not the primary path (see [Safety](#safety) for why source-compile is the documented default) — but if you'd rather just try it first, here's every click, nothing assumed:
 
-1. Go to the [Releases page](https://github.com/yanchau/djay-phrase-tool/releases/latest) and download `PhraseCounterApp-macOS.zip` (under **Assets**).
-2. Double-click the downloaded zip to unzip it — you'll get `PhraseCounterApp.app`.
-3. Move it wherever you like (e.g. your Applications folder), then **right-click it → Open → Open** (this one-time step is needed because the app is unsigned — no Apple Developer ID behind this project; a plain double-click will refuse to launch it the first time).
-4. Grant Accessibility permission when macOS asks (System Settings → Privacy & Security → Accessibility) — enable it for **PhraseCounterApp**.
-5. Open djay Pro, load a track, and the floating panel should appear. Same calibration and behavior as Option 1.
+1. **Go to the Releases page.** Click here: [Releases page](https://github.com/yanchau/djay-phrase-tool/releases/latest). This is GitHub's page for finished, downloadable versions of the project (as opposed to the source code you'd need to compile yourself in Option 1).
+
+2. **Download the app.** Scroll down slightly to a section called **Assets**, and click on `PhraseCounterApp-macOS.zip` to download it. It'll land in your Downloads folder, like any other download.
+
+3. **Unzip it.** Find `PhraseCounterApp-macOS.zip` in Finder (or click it in your browser's download bar) and double-click it. This creates a new file next to it named `PhraseCounterApp.app` — that's the actual app.
+
+4. **Move it somewhere permanent** (optional but recommended): drag `PhraseCounterApp.app` into your **Applications** folder, the same place all your other apps live. You can skip this and run it straight from Downloads too, it'll still work.
+
+5. **Open it for the first time — this needs one extra click because the app is unsigned** (there's no Apple Developer ID behind this project, so macOS doesn't recognize it yet):
+   - **Don't** just double-click it — macOS will refuse and show a warning that it's "from an unidentified developer." This is normal and expected, not an error on your end.
+   - Instead, **right-click** (or hold `Ctrl` and click) on `PhraseCounterApp.app`
+   - Choose **Open** from the menu that appears
+   - A dialog pops up warning that the app is from an unidentified developer — click **Open** again on that dialog
+   - It only asks this once. From now on, a normal double-click opens it directly.
+   - If macOS instead says the app **"is damaged and can't be opened"** (a different, unsigned-app-specific Gatekeeper quirk — moving it to the Trash is *not* actually required, despite what the dialog suggests): open Terminal (`Cmd+Space`, type `Terminal`, `Enter`), type `xattr -cr ` (with a trailing space, don't press Enter yet), drag `PhraseCounterApp.app` into the Terminal window so its path fills in, then press `Enter`. Try opening it again with right-click → Open as above.
+
+6. **Grant Accessibility permission.** The first time it actually runs, macOS will ask for permission to control your Mac's accessibility features — this is what lets the app read djay Pro's on-screen info. Either click **Open System Settings** in that prompt and turn on the toggle for **PhraseCounterApp**, or go there yourself: Apple menu (top-left corner) → System Settings → Privacy & Security → Accessibility.
+
+7. **Open djay Pro** and load a track on at least one deck.
+
+8. A floating panel appears above djay Pro, same as Option 1 — phrase counter, waveform, structure, energy, cue countdowns. Same calibration behavior too (`⌃⌥1`/`⌃⌥2` on the first kick for any track djay hasn't auto-analyzed yet).
 
 ### Option 3: Claude Code (no Terminal experience needed)
 
