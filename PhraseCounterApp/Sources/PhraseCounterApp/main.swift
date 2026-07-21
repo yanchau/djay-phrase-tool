@@ -5,8 +5,35 @@ import DjayBridge
 let app = NSApplication.shared
 app.setActivationPolicy(.accessory) // no Dock icon, no app menu — HUD-style overlay
 
-guard let djay = findDjayPro() else { exit(1) }
-guard checkAccessibilityPermission(djay.element) else { exit(1) }
+// Launching this by double-clicking in Finder has no console attached, so the
+// stderr diagnostics from findDjayPro()/checkAccessibilityPermission() below
+// are invisible there — without this alert, a launch failure looked to a user
+// exactly like "nothing happens," with no way to tell why short of relaunching
+// from Terminal. Shown as a real alert (not just printed) so Option 2 (the
+// no-Terminal path) doesn't require Terminal anyway just to see an error.
+func showFatalAlertAndExit(_ message: String) -> Never {
+    NSApp.setActivationPolicy(.regular)
+    NSApp.activate(ignoringOtherApps: true)
+    let alert = NSAlert()
+    alert.alertStyle = .critical
+    alert.messageText = L.t("Impossible de démarrer", "Can't start")
+    alert.informativeText = message
+    alert.runModal()
+    exit(1)
+}
+
+guard let djay = findDjayPro() else {
+    showFatalAlertAndExit(L.t(
+        "djay Pro ne semble pas ouvert. Ouvrez djay Pro, chargez un morceau sur une platine, puis relancez cette app.",
+        "djay Pro doesn't appear to be running. Open djay Pro, load a track on a deck, then relaunch this app."
+    ))
+}
+guard checkAccessibilityPermission(djay.element) else {
+    showFatalAlertAndExit(L.t(
+        "L'autorisation Accessibilité n'est pas accordée (ou n'a pas encore pris effet). Allez dans Réglages Système → Confidentialité et sécurité → Accessibilité, et vérifiez que PhraseCounterApp y est activé. Si la case est déjà cochée, décochez-la puis recochez-la, puis relancez cette app.",
+        "Accessibility permission isn't granted (or hasn't taken effect yet). Go to System Settings → Privacy & Security → Accessibility, and make sure PhraseCounterApp is enabled there. If it's already checked, try unchecking and rechecking it, then relaunch this app."
+    ))
+}
 
 let appState = AppState(djay: djay)
 appState.startPolling()
