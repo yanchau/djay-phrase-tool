@@ -65,5 +65,19 @@ cat > "$APP_DIR/Contents/Info.plist" <<'PLIST'
 </plist>
 PLIST
 
+echo "Re-signing (ad-hoc) so Gatekeeper sees a valid, consistent bundle signature..."
+# Without this, the hand-assembled bundle carries a stale linker-only signature
+# that only covers the raw binary, not the bundle as a whole (Info.plist etc.) —
+# Gatekeeper then reports the .app as "damaged" instead of the normal
+# unidentified-developer warning. This does NOT make the app trusted/notarized,
+# it just makes the signature internally consistent.
+codesign --force --deep --sign - "$APP_DIR"
+
 echo "Built: $APP_DIR"
 du -sh "$APP_DIR"
+
+ZIP_PATH="../dist/PhraseCounterApp-macOS.zip"
+rm -f "$ZIP_PATH"
+echo "Zipping with ditto (NOT the zip command — zip mangles .app bundle metadata and signatures, which is a common cause of the 'file is damaged' Gatekeeper error)..."
+ditto -c -k --sequesterRsrc --keepParent "$APP_DIR" "$ZIP_PATH"
+echo "Zipped: $ZIP_PATH"
