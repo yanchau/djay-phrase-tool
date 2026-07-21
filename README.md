@@ -85,6 +85,8 @@ The panel is resizable (drag any edge/corner, everything in it scales together) 
 
 A prebuilt, unsigned `.app` — no Xcode Command Line Tools, no Terminal at all. This is a convenience option, not the primary path (see [Safety](#safety) for why source-compile is the documented default) — but if you'd rather just try it first, here's every click, nothing assumed:
 
+> ⚠️ **djay Pro must already be open, with a track loaded on at least one deck, *before* you launch this app** (step 6 below) — the app only checks once, at launch, and doesn't wait or retry. Skip this and it'll show a clear "djay Pro doesn't appear to be running" error when you open it — not silent failure, but easy to avoid by doing djay Pro first.
+
 1. **Go to the Releases page.** Click here: [Releases page](https://github.com/yanchau/djay-phrase-tool/releases/latest). This is GitHub's page for finished, downloadable versions of the project (as opposed to the source code you'd need to compile yourself in Option 1).
 
 2. **Download the app.** Scroll down slightly to a section called **Assets**, and click on `PhraseCounterApp-macOS.zip` to download it. It'll land in your Downloads folder, like any other download.
@@ -93,7 +95,9 @@ A prebuilt, unsigned `.app` — no Xcode Command Line Tools, no Terminal at all.
 
 4. **Move it somewhere permanent** (optional but recommended): drag `PhraseCounterApp.app` into your **Applications** folder, the same place all your other apps live. You can skip this and run it straight from Downloads too, it'll still work.
 
-5. **Open it for the first time — this needs one extra click because the app is unsigned** (there's no Apple Developer ID behind this project, so macOS doesn't recognize it yet):
+5. **Open djay Pro and load a track** on at least one deck — do this now, before the next step (see the warning above).
+
+6. **Open the app for the first time — this needs one extra click because the app is unsigned** (there's no Apple Developer ID behind this project, so macOS doesn't recognize it yet):
    - **Don't** just double-click it — macOS will refuse and show a warning that it's "from an unidentified developer." This is normal and expected, not an error on your end.
    - Instead, **right-click** (or hold `Ctrl` and click) on `PhraseCounterApp.app`
    - Choose **Open** from the menu that appears
@@ -101,9 +105,7 @@ A prebuilt, unsigned `.app` — no Xcode Command Line Tools, no Terminal at all.
    - It only asks this once. From now on, a normal double-click opens it directly.
    - If macOS instead says the app **"is damaged and can't be opened"** (a different, unsigned-app-specific Gatekeeper quirk — moving it to the Trash is *not* actually required, despite what the dialog suggests): open Terminal (`Cmd+Space`, type `Terminal`, `Enter`), type `xattr -cr ` (with a trailing space, don't press Enter yet), drag `PhraseCounterApp.app` into the Terminal window so its path fills in, then press `Enter`. Try opening it again with right-click → Open as above.
 
-6. **Grant Accessibility permission.** The first time it actually runs, macOS will ask for permission to control your Mac's accessibility features — this is what lets the app read djay Pro's on-screen info. Either click **Open System Settings** in that prompt and turn on the toggle for **PhraseCounterApp**, or go there yourself: Apple menu (top-left corner) → System Settings → Privacy & Security → Accessibility.
-
-7. **Open djay Pro** and load a track on at least one deck.
+7. **Grant Accessibility permission.** The first time it actually runs, macOS will ask for permission to control your Mac's accessibility features — this is what lets the app read djay Pro's on-screen info. Either click **Open System Settings** in that prompt and turn on the toggle for **PhraseCounterApp**, or go there yourself: Apple menu (top-left corner) → System Settings → Privacy & Security → Accessibility. If you already went through this once for an earlier download of the app and it's still not working, open Accessibility settings and check whether **PhraseCounterApp** is listed twice (once per version you've downloaded) — remove the old entry with the **−** button and re-grant permission for the current one.
 
 8. A floating panel appears above djay Pro, same as Option 1 — phrase counter, waveform, structure, energy, cue countdowns. Same calibration behavior too (`⌃⌥1`/`⌃⌥2` on the first kick for any track djay hasn't auto-analyzed yet).
 

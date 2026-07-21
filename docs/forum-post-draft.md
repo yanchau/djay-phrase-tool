@@ -123,11 +123,14 @@ Full version of this path with troubleshooting: [`GETTING-STARTED-FOR-BEGINNERS.
 
 Someone asked (fair question) why I don't just ship a signed binary instead of asking people to compile. Short answer: no Apple Developer ID behind this project, so I can't sign/notarize it — "unsigned binary" and "compile from source" both need a one-time Gatekeeper workaround either way, but only the source path lets you read the code before it runs, which matters more than usual for something with Accessibility + database read access. So source-compile stays the default above. That said, if you just want to try it with the least friction:
 
+⚠️ **Open djay Pro and load a track first, before launching the app** — it only checks once at launch and won't wait for djay Pro to start. Get the order wrong and it'll just tell you clearly ("djay Pro doesn't appear to be running") rather than doing nothing.
+
 1. Go to the [Releases page](https://github.com/yanchau/djay-phrase-tool/releases/latest) and download `PhraseCounterApp-macOS.zip` under **Assets**.
 2. Double-click the zip to unzip it — you get `PhraseCounterApp.app`.
-3. Move it wherever you like (e.g. Applications), then **right-click it → Open → Open** (needed once, since it's unsigned — a normal double-click will refuse to launch it the first time).
-4. Grant Accessibility permission when macOS asks (System Settings → Privacy & Security → Accessibility → enable **PhraseCounterApp**).
-5. Open djay Pro, load a track — same behavior as above from here.
+3. Move it wherever you like (e.g. Applications).
+4. Open djay Pro and load a track on a deck.
+5. **Then** right-click the app → Open → Open (needed once, since it's unsigned — a normal double-click will refuse to launch it the first time).
+6. Grant Accessibility permission when macOS asks (System Settings → Privacy & Security → Accessibility → enable **PhraseCounterApp**). If you'd already granted this for an earlier download, check that list for a duplicate "PhraseCounterApp" entry from the old version and remove it.
 
 ## What it doesn't do
 
